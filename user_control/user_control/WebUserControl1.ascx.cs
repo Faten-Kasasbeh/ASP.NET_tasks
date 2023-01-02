@@ -26,26 +26,33 @@ namespace user_control
 
                 SqlCommand cmd1 = new SqlCommand("select SUM([momtaz]) from users", con);
                 int momtaz = (int)cmd1.ExecuteScalar();
-                Label4.Text = momtaz.ToString() ;
-
                 SqlCommand cmd2 = new SqlCommand("select SUM([verygood]) from users", con);
                 int veryg = (int)cmd2.ExecuteScalar();
-                Label5.Text = veryg.ToString();
                 SqlCommand cmd3 = new SqlCommand("select SUM([good]) from users", con);
                 int good = (int)cmd3.ExecuteScalar();
-                Label6.Text = good.ToString();
                 SqlCommand cmd4 = new SqlCommand("select SUM([weak]) from users", con);
                 int weak = (int)cmd4.ExecuteScalar();
-                Label7.Text = weak.ToString();
                 SqlCommand cmd5 = new SqlCommand("select SUM([acceptable]) from users", con);
                 int acceptable = (int)cmd5.ExecuteScalar();
-                Label8.Text = acceptable.ToString();
-
                 int all = momtaz + veryg + good + weak + acceptable;
                 Label9.Text = all.ToString();
-                //double mom = momtaz / all * 100;
 
-                con.Close();
+                double mom = (double)momtaz / (double)all;
+                double gg = (double)veryg / (double)all;
+                double vv = (double)good / (double)all;
+                double ww = (double)weak / (double)all;
+                double acc = (double)acceptable / (double)all;
+
+                mom = Math.Round(mom, 2);
+                gg = Math.Round(gg, 2);
+                vv = Math.Round(vv, 2);
+                ww = Math.Round(ww, 2);
+                acc = Math.Round(acc, 2);
+                Label4.Text = (mom * 100).ToString() + "  %";
+                Label5.Text = (gg * 100).ToString() + "  %";
+                Label6.Text = (vv * 100).ToString() + "  %";
+                Label7.Text = (ww * 100).ToString() + "   %";
+                Label8.Text = (acc * 100).ToString() + "   %";
             }
         }
         protected void Button1_Click(object sender, EventArgs e)
